@@ -11,9 +11,9 @@
       <label for="pwd">Password:</label>
       <input type="password" class="form-control" placeholder="Enter password" id="pwd" />
     </div>
-    <button type="button" class="btn btn-primary">LOGIN</button>
+    <button type="button" id="btn-login" class="btn btn-primary">LOGIN</button>
   </form>
 </div>
 <br />
-
+<script src="/blog/js/user.js"></script>
 <%@ include file="../layout/footer.jsp" %>

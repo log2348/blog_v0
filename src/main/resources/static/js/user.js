@@ -4,6 +4,10 @@ let index = {
 		$("#btn-join").bind("click", () => {
 			this.save();
 		})
+		
+		$("#btn-login").bind("click", () => {
+			this.login();
+		})
 	},
 	
 	save: function() {
@@ -33,6 +37,31 @@ let index = {
 			console.log(error);
 			alert("회원가입에 실패하였습니다.");
 		})
+	},
+	
+	login: function() {
+		
+		let data = {
+			username: $("#username").val(),
+			password: $("#password").val()
+		}
+		
+		$.ajax({
+			type: "POST",
+			url: "/blog/api/user/login",
+			data: JSON.stringify(data),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		}).done(function(data, textStatus, xhr) {
+			// 통신 성공
+			alert("로그인 완료")
+			console.log(data);
+			location.href="/blog"
+		}).fail(function(error) {
+			// 통신 실패
+			alert("로그인 실패")
+			console.log(error)
+		});
 	}
 }
 
