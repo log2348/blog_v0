@@ -24,6 +24,8 @@ public class UserService {
 			System.out.println("UserService 호출 !!");
 			String rawPassword = user.getPassword();
 			String encPassword = encoder.encode(rawPassword);
+			//System.out.println("rawPassword:" + rawPassword);
+			//System.out.println(encPassword);
 			user.setPassword(encPassword);
 			user.setRole(RoleType.USER);
 			userRepository.save(user);
@@ -33,7 +35,5 @@ public class UserService {
 		}
 		return 1;
 	}
-	
-
 
 }

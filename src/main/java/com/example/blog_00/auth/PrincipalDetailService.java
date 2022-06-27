@@ -24,5 +24,4 @@ public class PrincipalDetailService implements UserDetailsService {
 		return new PrincipalDetail(principal); // 시큐리티 세션에 유저정보 저장된다.
 	}
 	
-
 }

@@ -27,7 +27,7 @@
     </div>
 
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-      <a class="navbar-brand" href="/blog">BLOG</a>
+      <a class="navbar-brand" href="/">BLOG</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -44,7 +44,7 @@
             </c:when>
             <c:otherwise>
               <li class="nav-item">
-                <a class="nav-link" href="/auth/login_form">BOARD</a>
+                <a class="nav-link" href="/board/save_post_form">BOARD</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/logout">LOGOUT</a>

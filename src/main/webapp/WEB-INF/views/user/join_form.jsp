@@ -5,15 +5,15 @@
     <form  action="/auth/joinProc" method="post">
     <div class="form-group">
       <label for="username">Username: </label>
-      <input type="username" class="form-control" placeholder="Enter username" id="username" />
+      <input type="text" class="form-control" placeholder="Enter username" id="username" name="username">
     </div>
     <div class="form-group">
       <label for="password">Password:</label>
-      <input type="password" class="form-control" placeholder="Enter password" id="password" />
+      <input type="password" class="form-control" placeholder="Enter password" id="password" name="password">
     </div>
     <div class="form-group">
       <label for="email">Email Address:</label>
-      <input type="email" class="form-control" placeholder="Enter email" id="email" />
+      <input type="email" class="form-control" placeholder="Enter email" id="email" name="email">
     </div>
 
     <button id="btn-join" type="submit" class="btn btn-primary">JOIN</button>

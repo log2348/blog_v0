@@ -25,7 +25,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@DynamicInsert
 public class User {
 	
 	@Id
@@ -35,7 +34,7 @@ public class User {
 	@Column(nullable = false, length = 30, unique = true)
 	private String username;
 	
-	@Column(nullable = false, length = 50)
+	@Column(nullable = false, length = 100)
 	private String password;
 	
 	@Column(nullable = false, length = 50)
