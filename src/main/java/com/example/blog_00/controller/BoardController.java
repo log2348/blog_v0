@@ -8,7 +8,7 @@ public class BoardController {
 	
 	@GetMapping({"", "/"})
 	public String index() {
-		return "home";
+		return "index";
 	}
 
 }

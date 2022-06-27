@@ -1,4 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authorize access="isAuthenticated()">
+    <sec:authentication property="principal" var="principal"/>
+</sec:authorize>
 <!DOCTYPE html>
   <head>
     <title>Blog Test</title>
@@ -29,20 +34,20 @@
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
           <c:choose>
-            <c:when test="${empty sessionScope.principal}">
+            <c:when test="${empty principal}">
               <li class="nav-item">
-                <a class="nav-link" href="/blog/user/login_form">LOGIN</a>
+                <a class="nav-link" href="/auth/login_form">LOGIN</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/blog/user/join_form">JOIN</a>
+                <a class="nav-link" href="/auth/join_form">JOIN</a>
               </li>
             </c:when>
             <c:otherwise>
               <li class="nav-item">
-                <a class="nav-link" href="/blog/user/login_form">BOARD</a>
+                <a class="nav-link" href="/auth/login_form">BOARD</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/blog/user/join_form">LOGOUT</a>
+                <a class="nav-link" href="/logout">LOGOUT</a>
               </li>
             </c:otherwise>
           </c:choose>

@@ -2,12 +2,13 @@
 
 <div class="container">
     <br />
+    <form  action="/auth/joinProc" method="post">
     <div class="form-group">
       <label for="username">Username: </label>
       <input type="username" class="form-control" placeholder="Enter username" id="username" />
     </div>
     <div class="form-group">
-      <label for="pwd">Password:</label>
+      <label for="password">Password:</label>
       <input type="password" class="form-control" placeholder="Enter password" id="password" />
     </div>
     <div class="form-group">
@@ -15,10 +16,9 @@
       <input type="email" class="form-control" placeholder="Enter email" id="email" />
     </div>
 
-    <button id="btn-join" type="button" class="btn btn-primary">JOIN</button>
+    <button id="btn-join" type="submit" class="btn btn-primary">JOIN</button>
   </form>
 </div>
 <br />
 
-<script src="/blog/js/user.js"></script>
 <%@ include file="../layout/footer.jsp" %>
