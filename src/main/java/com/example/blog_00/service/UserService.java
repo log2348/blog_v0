@@ -36,4 +36,21 @@ public class UserService {
 		return 1;
 	}
 
+	// 회원정보 수정 기능
+	@Transactional
+	public void updateUser(User user) {
+
+		User userEntity = userRepository.findById(user.getId()).orElseThrow(() -> {
+			return new IllegalArgumentException("존재하지 않는 회원입니다.");
+		});
+		
+		// 패스워드 해싱
+		String rawPassword = user.getPassword();
+		String hashPassword = encoder.encode(rawPassword);
+		
+		userEntity.setPassword(hashPassword);
+		userEntity.setEmail(user.getEmail());
+		
+	}
+
 }

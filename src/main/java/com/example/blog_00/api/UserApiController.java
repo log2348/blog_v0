@@ -2,7 +2,11 @@ package com.example.blog_00.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,12 +20,20 @@ public class UserApiController {
 	@Autowired
 	private UserService userService;
 	
-	@PostMapping("/auth/joinProc")
-	public ResponseDto<Integer> saveUser(User user) {
-		int result = userService.saveUser(user);
-		System.out.println(user.getUsername());
-		System.out.println(user.getPassword());
-		return new ResponseDto<Integer>(HttpStatus.OK.value(), result);
+	@Autowired
+	private AuthenticationManager authenticationManager;	
+	
+	@PutMapping("/user/update")
+	public ResponseDto<Integer> updateUserInfo(@RequestBody User user) {
+		userService.updateUser(user);
+		System.out.println("UserApiController 호출");
+		System.out.println("user: " + user);
+		
+		Authentication authentication = authenticationManager
+				.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
+
 
 }

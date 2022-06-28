@@ -44,7 +44,10 @@
             </c:when>
             <c:otherwise>
               <li class="nav-item">
-                <a class="nav-link" href="/board/save_post_form">BOARD</a>
+                <a class="nav-link" href="/board/save_post_form">POST</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/user/update_user_form">MY INFO</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/logout">LOGOUT</a>
