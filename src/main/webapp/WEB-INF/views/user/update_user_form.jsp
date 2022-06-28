@@ -4,7 +4,8 @@
 <br/><br/>
 <div class="container">
 <h3>My Info</h3>
-<form action="#" method="post" class="was-validated">
+<br/>
+<form action="#" class="was-validated">
   <div class="form-group">
   	<input type="hidden" id="id" value="${principal.user.id}">
     <label for="username">Username:</label>
@@ -24,7 +25,7 @@
     <div class="valid-feedback">Valid.</div>
     <div class="invalid-feedback">필수 항목입니다.</div>
   </div>
-
+	<br/>
   <button type="button" id="btn-update" class="btn btn-primary">MODIFY</button>
 </form>
 </div>
