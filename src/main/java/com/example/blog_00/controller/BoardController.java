@@ -11,4 +11,11 @@ public class BoardController {
 		return "index";
 	}
 
+	// 글 작성 폼
+	@GetMapping("/board/save_post_form")
+	public String getSavePostForm() {
+		return "board/save_post_form";
+	}
+	
+	
 }
