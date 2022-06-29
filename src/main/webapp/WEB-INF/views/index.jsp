@@ -1,32 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="layout/header.jsp" %>
 
+<style>
+  .multiLine {
+    width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+</style>
+
 <div class="container" style="margin-top: 30px">
-  <div class="row">
-    <div class="col-sm-4">
-      <h2>About Me</h2>
-      <h5>Photo of me:</h5>
-      <div class="fakeimg">Profile Image</div>
-      <p>Some text about me..</p>
-    </div>
-    <div class="col-sm-8">
-      <h2>Title</h2>
-      <h5>Posting Date</h5>
-      <div class="fakeimg">Post Thumbnail</div>
-      <p>Some text..</p>
-      <br />
-      <h2>Title</h2>
-      <h5>Posting Date</h5>
-      <div class="fakeimg">Post Thumbnail</div>
-      <p>Some text..</p>
-      <br />
-      <h2>Title</h2>
-      <h5>Posting Date</h5>
-      <div class="fakeimg">Post Thumbnail</div>
-      <p>Some text..</p>
+<c:forEach var="board" items="${pageable.content}">
+  <div class="card m-2">
+    <div class="card-body">
+      <h2>${board.title}</h2>
+      <h6>Date : ${board.createDate}</h6>
+      <h8 type="text" class="multiLine">${board.content}</h8>
+      <a href="/board/${board.id}" class="btn btn-primary float-right">Detail</a>
       <br />
     </div>
   </div>
+</c:forEach>
 </div>
+<br/>
+<ul class="pagination justify-content-center">
+  <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+</ul>
 
 <%@ include file="layout/footer.jsp" %>

@@ -1,6 +1,6 @@
 package com.example.blog_00.model;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -48,7 +48,7 @@ public class Board {
 	private User userId;
 	
 	@CreationTimestamp
-	private Timestamp createDate;
+	private Date createDate;
 	
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
 	private List<Reply> replies;

@@ -6,6 +6,14 @@ let index = {
 			this.save();
 		})
 		
+		$("#btn-delete").bind("click", () => {
+			this.delete();
+		})
+		
+		$("#btn-update").bind("click", () => {
+			this.update();
+		})		
+		
 	},
 	
 	save: function() {
@@ -22,8 +30,8 @@ let index = {
 			contentType: "application/json; charset=utf-8",
 			dataType: "json"
 		})
-		.done(function(data) {
-			if(data.status == 200) {
+		.done(function(response) {
+			if(response.status == 200) {
 			alert("글쓰기가 완료되었습니다.");
 			location.href="/";				
 			} else {
@@ -34,7 +42,50 @@ let index = {
 			alert("글쓰기에 실패했습니다.");
 		});
 		
-	}
+	},
+	
+	delete: function() {
+		let id = $("#board-id").text();
+		
+		$.ajax({
+			type: "DELETE",
+			url: "/api/board/" + id
+		})
+		.done(function(response) {
+			alert("게시글이 삭제되었습니다.");
+			location.href="/";
+		})
+		.fail(function(error) {
+			console.log(error);
+			alert("게시글이 삭제되지 않았습니다.");
+		});
+	},
+	
+	
+	update: function() {
+		let id = $("#board-id").val();
+		
+		let data = {
+			title: $("#title").val(),
+			content: $("#content").val()
+		}
+		
+		$.ajax({
+			type: "PUT",
+			url: "/api/board/" + id,
+			data: JSON.stringify(data),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		})
+		.done(function(response) {
+			alert("게시글이 수정되었습니다.");
+			location.href="/";
+		})
+		.fail(function(error) {
+			console.log(error);
+			alert("게시글이 수정되지 않았습니다.");
+		});
+}
 	
 }
 
