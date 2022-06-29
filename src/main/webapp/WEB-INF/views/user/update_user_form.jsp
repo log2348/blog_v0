@@ -9,7 +9,7 @@
   <div class="form-group">
   	<input type="hidden" id="id" value="${principal.user.id}">
     <label for="username">Username:</label>
-    <input type="text" class="form-control" id="username" value="${principal.user.username}" placeholder="Enter username" name="username" readonly="readonly">
+    <input type="text" class="form-control" id="username" value="${principal.user.username}" name="username" readonly="readonly">
   </div>
   <div class="form-group">
     <label for="password">Password:</label>
