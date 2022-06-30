@@ -26,6 +26,16 @@
 	</c:if>
 	<br/><br/>
 	<br/>
+	
+	<div class="card">
+		<div class ="card-header">댓글 목록</div>
+	</div>
+	<ul class="list-group" id="reply--box">
+	<c:forEach var="reply" items="$">
+	
+	</c:forEach>
+	
+	</ul>
 
 </div>
 
