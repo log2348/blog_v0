@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.blog_00.auth.PrincipalDetail;
 import com.example.blog_00.dto.ResponseDto;
 import com.example.blog_00.model.Board;
+import com.example.blog_00.model.Reply;
 import com.example.blog_00.service.BoardService;
 
 @RestController
@@ -26,7 +27,7 @@ public class BoardApiController {
 	// 글 작성 기능
 	// 작성한 유저 정보까지 보내기
 	@PostMapping("/board/save")
-	public ResponseDto<Integer> save(@RequestBody Board board, @AuthenticationPrincipal PrincipalDetail principalDetail) {
+	public ResponseDto<Integer> saveBoard(@RequestBody Board board, @AuthenticationPrincipal PrincipalDetail principalDetail) {
 		boardService.saveBoard(board, principalDetail.getUser());
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
@@ -45,4 +46,11 @@ public class BoardApiController {
 	}
 	
 	// 댓글 작성 기능
+	@PostMapping("/board/{boardId}/reply")
+	public ResponseDto<Reply> saveReply(@PathVariable int boardId, @RequestBody Reply reply,
+			@AuthenticationPrincipal PrincipalDetail principalDetail) {
+		
+		Reply replyEntity = boardService.saveReply(principalDetail.getUser(), boardId, reply);		
+		return new ResponseDto<>(HttpStatus.OK.value(), replyEntity);
+	}
 }

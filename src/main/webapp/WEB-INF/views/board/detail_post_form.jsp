@@ -32,12 +32,11 @@
 	</div>
 	<ul class="list-group" id="reply--box">
 	<c:forEach var="reply" items="$">
-	
+		  <li class="list-group-item">Second item</li>
 	</c:forEach>
-	
 	</ul>
-
 </div>
-
+	<br/><br/>
+	
 <script src="/js/board.js"></script>
 <%@ include file="../layout/footer.jsp" %>

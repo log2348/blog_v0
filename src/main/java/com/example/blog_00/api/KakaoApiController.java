@@ -35,9 +35,8 @@ public class KakaoApiController {
 	
 	@Autowired
 	private AuthenticationManager authenticationManager;
-
-	// REST API 키
-	private static final String APP_KEY = "a230199492e4aec300eeb42c5cdbb121";
+	
+	private static final String APP_KEY = "a230199492e4aec300eeb42c5cdbb121"; // REST API 키
 	private static final String REDIRECT_URI = "http://localhost:9090/oauth/kakao/callback";
 	private static final String GRANT_TYPE = "authorization_code";
 	private static final String AUTHORIZATION_CODE = "JWVdB5608wINwKX2wXLd5Fp6CFJDGzoSCXh1560NFWsDe-L3eOTEMpUjsBTQvzcLilmZaQopb1UAAAGBs1VPig";
@@ -130,7 +129,6 @@ public class KakaoApiController {
 		Authentication authentication = authenticationManager
 				.authenticate(new UsernamePasswordAuthenticationToken(kakaoUser.getUsername(), kakaoUser.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-		
 		
 		return "redirect:/";	
 	}

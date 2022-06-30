@@ -8,14 +8,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.blog_00.dto.BoardSaveRequestDto;
 import com.example.blog_00.model.Board;
+import com.example.blog_00.model.Reply;
 import com.example.blog_00.model.User;
 import com.example.blog_00.repository.BoardRepository;
+import com.example.blog_00.repository.ReplyRepository;
 
 @Service
 public class BoardService {
 	
 	@Autowired
 	private BoardRepository boardRepository;
+	
+	@Autowired
+	private ReplyRepository replyRepository;
 	
 	@Transactional
 	public void savePost(BoardSaveRequestDto dto) {
@@ -55,6 +60,22 @@ public class BoardService {
 		
 		boardEntity.setTitle(board.getTitle());
 		boardEntity.setContent(board.getContent());
+		
+	}
+
+	@Transactional
+	public Reply saveReply(User user, int boardId, Reply requestReply) {
+		// 먼저 boardId로 Board 객체 찾는다
+		Board boardEntity = boardRepository.findById(boardId).orElseThrow(() -> {
+			return new IllegalArgumentException("해당 게시글은 존재하지 않습니다.");
+		});
+		
+		requestReply.setUser(user);
+		requestReply.setBoard(boardEntity);
+
+		Reply replyEntity = replyRepository.save(requestReply);
+		
+		return replyEntity;
 		
 	}
 

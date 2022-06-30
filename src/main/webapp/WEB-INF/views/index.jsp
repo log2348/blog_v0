@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="layout/header.jsp" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ include file="layout/header.jsp" %>
 
 <style>
   .multiLine {
@@ -12,47 +11,60 @@
   }
 </style>
 
-<div class="container" style="margin-top: 30px">
-<c:forEach var="board" items="${pageable.content}">
-  <div class="card m-2">
-    <div class="card-body">
-      <h2>${board.title}</h2>
-      <h6>Date : ${board.createDate}</h6>
-      <h8 type="text" class="multiLine">${board.content}</h8>
-      <a href="/board/${board.id}" class="btn btn-primary float-right">Detail</a>
-      <br />
+<div class="parent-container d-flex" style="margin-top: 30px">
+  <div class="container" style="margin-left: 30px">
+      <div class="card col-sm-8" style="width: 500px">
+        <img class="card-img-top" src="img_avatar1.png" alt="Card image" />
+        <div class="card-body">
+          <h4 class="card-title">John Doe</h4>
+          <p class="card-text">Some example text.</p>
+          <a href="#" class="btn btn-primary">See Profile</a>
+        </div>
+      </div>
     </div>
-  </div>
-</c:forEach>
+    <div class="container">
+	<div class="row">
+      <c:forEach var="board" items="${pageable.content}">
+        <div class="card m-2 col-sm-10">
+          <div class="card-body">
+            <h2>${board.title}</h2>
+            <h6>Date : ${board.createDate}</h6>
+            <h8 type="text" class="multiLine">${board.content}</h8>
+            <a href="/board/${board.id}" class="btn btn-primary float-right">Detail</a>
+            <br />
+          </div>
+        </div>
+      </c:forEach>
+    </div>
+    </div>
 </div>
-<br/>
-<ul class="pagination justify-content-center">
+<br />
 
-	<c:set var="isDisabled" value="disabled"></c:set>
-	<c:set var="isAbled" value=""></c:set>
-	
+<ul class="pagination justify-content-center">
+  <c:set var="isDisabled" value="disabled"></c:set>
+  <c:set var="isAbled" value=""></c:set>
+
   <li class="page-item ${pageable.first ? isDisabled : isAbled}">
-  	<a class="page-link" href="/?page=${pageable.number - 1}">Prev</a>
+    <a class="page-link" href="/?page=${pageable.number - 1}">Prev</a>
   </li>
-  
+
   <c:forEach var="num" items="${pageNumbers}">
-  	<c:choose>
-  		<c:when test="${pageable.number + 1 eq num}">
-  			<li class="page-item active">
-  			<a class="page-link" href="/?page=${num - 1}">${num}</a>
-  			</li>  		
-  		</c:when>
-  		<c:otherwise>
-		  <li class="page-item">
-		  <a class="page-link" href="/?page=${num - 1}">${num}</a>
-		  </li>
-  		</c:otherwise>
-  	</c:choose>
-  
-  </c:forEach>  
-  
+    <c:choose>
+      <c:when test="${pageable.number + 1 eq num}">
+        <li class="page-item active">
+          <a class="page-link" href="/?page=${num - 1}">${num}</a>
+        </li>
+      </c:when>
+      <c:otherwise>
+        <li class="page-item">
+          <a class="page-link" href="/?page=${num - 1}">${num}</a>
+        </li>
+      </c:otherwise>
+    </c:choose>
+  </c:forEach>
+
   <li class="page-item ${pageable.last ? isDisabled : isAbled}">
-  	<a class="page-link" href="/?page=${pageable.number + 1}">Next</a>
+    <a class="page-link" href="/?page=${pageable.number + 1}">Next</a>
   </li>
 </ul>
 
