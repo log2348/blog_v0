@@ -37,7 +37,6 @@ spring:
   security:
     user:
       name: test
-      password: 1234
       
-tenco:
+kakao:
   key: tenco1234!

@@ -45,5 +45,7 @@ public class User {
 	
 	@Enumerated(EnumType.STRING)
 	private RoleType role;
+	
+	private String oauth; // 소셜 로그인 사용자 구분
 
 }

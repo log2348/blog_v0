@@ -53,4 +53,13 @@ public class UserService {
 		
 	}
 
+	@Transactional
+	public User checkOldUser(String username) {
+		User userEntity = userRepository.findByUsername(username).orElseGet(() -> {
+			return new User();
+		});
+		
+		return userEntity;
+	}
+
 }
