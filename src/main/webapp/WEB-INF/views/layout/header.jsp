@@ -6,7 +6,7 @@
 </sec:authorize>
 <!DOCTYPE html>
   <head>
-    <title>Blog Test</title>
+    <title>my Blog v2</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
@@ -15,18 +15,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-    <style>
-      .fakeimg {
-        height: 200px;
-        background: #aaa;
-      }
-    </style>
   </head>
   <body>
-    <div class="jumbotron text-center" style="margin-bottom: 0">
-      <h1>My Blog Example</h1>
-      <p>Welcome to my blog!</p>
-    </div>
 
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
       <a class="navbar-brand" href="/">BLOG</a>
@@ -47,9 +37,6 @@
             <c:otherwise>
               <li class="nav-item">
                 <a class="nav-link" href="/board/save_post_form">POST</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/user/update_user_form">MY INFO</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/logout">LOGOUT</a>

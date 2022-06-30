@@ -11,18 +11,19 @@
   }
 </style>
 
-<div class="parent-container d-flex" style="margin-top: 30px">
-  <div class="container" style="margin-left: 30px">
-      <div class="card col-sm-8" style="width: 500px">
-        <img class="card-img-top" src="img_avatar1.png" alt="Card image" />
+  <div class="container" style="margin-top: 30px">
+
+        <img class="card-img-top" src="/image/dog.png" />
         <div class="card-body">
-          <h4 class="card-title">John Doe</h4>
+          <h4 class="card-title">Username 님</h4>
           <p class="card-text">Some example text.</p>
-          <a href="#" class="btn btn-primary">See Profile</a>
+          <a href="/user/update_user_form" class="btn btn-dark">내 정보</a>
         </div>
-      </div>
+     
     </div>
-    <div class="container">
+    <hr/>
+    
+    <div class="container" style="margin-top: 30px">
 	<div class="row">
       <c:forEach var="board" items="${pageable.content}">
         <div class="card m-2 col-sm-10">
@@ -37,7 +38,6 @@
       </c:forEach>
     </div>
     </div>
-</div>
 <br />
 
 <ul class="pagination justify-content-center">

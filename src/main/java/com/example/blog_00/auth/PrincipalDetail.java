@@ -11,8 +11,7 @@ import com.example.blog_00.model.User;
 import lombok.Data;
 
 @Data
-public class PrincipalDetail implements UserDetails{
-	
+public class PrincipalDetail implements UserDetails{	
 	
 	/**
 	 * 모든 클래스는 UID를 가지고 있다.
