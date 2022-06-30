@@ -23,7 +23,7 @@ public class BoardApiController {
 	@Autowired
 	private BoardService boardService;
 	
-	// 글 작성기능
+	// 글 작성 기능
 	// 작성한 유저 정보까지 보내기
 	@PostMapping("/board/save")
 	public ResponseDto<Integer> save(@RequestBody Board board, @AuthenticationPrincipal PrincipalDetail principalDetail) {
@@ -43,4 +43,6 @@ public class BoardApiController {
 		boardService.updateBoard(id, board);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
+	
+	// 댓글 작성 기능
 }

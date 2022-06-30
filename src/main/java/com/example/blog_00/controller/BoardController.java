@@ -1,6 +1,9 @@
 package com.example.blog_00.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
@@ -9,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.example.blog_00.model.Board;
 import com.example.blog_00.service.BoardService;
 
 @Controller
@@ -18,9 +22,34 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@GetMapping({"", "/"})
-	public String index(@PageableDefault(size = 3, sort = "id", direction = Direction.DESC) Pageable pageable,
+	public String index(@PageableDefault(size = 4, sort = "id", direction = Direction.DESC) Pageable pageable,
 			Model model) {
-		model.addAttribute("pageable", boardService.getBoardList(pageable));
+		
+		// Pagination - 페이지 블록 동적 처리
+		
+		Page<Board> boardPages = boardService.getBoardList(pageable);
+		
+		// 현재 화면 페이지
+		int nowPage = boardPages.getPageable().getPageNumber() + 1;
+		
+		// 현재 화면에 보여질 페이지 블록의 시작 번호
+		int startPage = Math.max(nowPage - 2, 1);
+		
+		// 현재 화면에 보여질 페이지 블록의 마지막 번호
+		int endPage = Math.min(nowPage + 2, boardPages.getTotalPages());
+		
+		// 페이지 번호 배열로 만들기
+		ArrayList<Integer> pageNumbers = new ArrayList<Integer>();
+		
+		for (int i = startPage; i < endPage + 1; i++) {
+			pageNumbers.add(i);
+		}
+		
+		model.addAttribute("pageable", boardPages);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("pageNumbers", pageNumbers);
+		
 		return "index";
 	}
 

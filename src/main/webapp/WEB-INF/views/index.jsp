@@ -27,8 +27,33 @@
 </div>
 <br/>
 <ul class="pagination justify-content-center">
-  <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+
+	<c:set var="isDisabled" value="disabled"></c:set>
+	<c:set var="isAbled" value=""></c:set>
+	
+  <li class="page-item ${pageable.first ? isDisabled : isAbled}">
+  	<a class="page-link" href="/?page=${pageable.number - 1}">Prev</a>
+  </li>
+  
+  <c:forEach var="num" items="${pageNumbers}">
+  	<c:choose>
+  		<c:when test="${pageable.number + 1 eq num}">
+  			<li class="page-item active">
+  			<a class="page-link" href="/?page=${num - 1}">${num}</a>
+  			</li>  		
+  		</c:when>
+  		<c:otherwise>
+		  <li class="page-item">
+		  <a class="page-link" href="/?page=${num - 1}">${num}</a>
+		  </li>
+  		</c:otherwise>
+  	</c:choose>
+  
+  </c:forEach>  
+  
+  <li class="page-item ${pageable.last ? isDisabled : isAbled}">
+  	<a class="page-link" href="/?page=${pageable.number + 1}">Next</a>
+  </li>
 </ul>
 
 <%@ include file="layout/footer.jsp" %>
