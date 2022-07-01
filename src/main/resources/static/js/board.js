@@ -105,8 +105,12 @@ let index = {
 			dataType: "json"
 		})
 		.done(function(response) {
+			if(data.content == "" || data.content.trim() == "") {
+				alert("내용을 입력해주세요.")
+			} else {
+				appendReply(response.data);
+			}
 			console.log(response)
-			appendReply(response.data);
 		})
 		.fail(function(error) {
 			alert("오류 발생. 댓글이 등록되지 않았습니다.")
@@ -117,17 +121,25 @@ let index = {
 	
 	replyDelete: function(boardId, replyId) {
 
-		$.ajax({
-			type: "DELETE",
-			url: `/api/board/${boardId}/reply/${replyId}`	
-		})
-		.done(function(response) {
-			alert("댓글이 삭제되었습니다.");
-			location.href=`/board/${boardId}`;
-		})
-		.fail(function(error) {
-			alert("오류 발생. 댓글이 삭제되지 않았습니다.");
-		})
+		let deleteCheck = confirm("삭제하시겠습니까?");
+		
+		if(deleteCheck) {
+			
+			$.ajax({
+				type: "DELETE",
+				url: `/api/board/${boardId}/reply/${replyId}`	
+			})
+			.done(function(response) {
+				if(deleteCheck) {
+					location.href=`/board/${boardId}`;
+					alert("댓글이 삭제되었습니다.");
+				}
+			})
+			.fail(function(error) {
+				alert("오류 발생. 댓글이 삭제되지 않았습니다.");
+			})
+			
+		}
 		
 	}
 	
