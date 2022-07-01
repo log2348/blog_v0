@@ -21,13 +21,15 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-	@GetMapping({"", "/"})
+	@GetMapping({"", "/", "/board/search"})
 	public String index(@PageableDefault(size = 4, sort = "id", direction = Direction.DESC) Pageable pageable,
-			Model model) {
+			Model model, String q) {
 		
 		// Pagination - 페이지 블록 동적 처리
 		
-		Page<Board> boardPages = boardService.getBoardList(pageable);
+		String searchTitle = q == null ? "" : q;
+		
+		Page<Board> boardPages = boardService.searchBoardByTitle(searchTitle, pageable);
 		
 		// 현재 화면 페이지
 		int nowPage = boardPages.getPageable().getPageNumber() + 1;
@@ -45,10 +47,9 @@ public class BoardController {
 			pageNumbers.add(i);
 		}
 		
-		model.addAttribute("pageable", boardPages);
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("endPage", endPage);
-		model.addAttribute("pageNumbers", pageNumbers);
+		model.addAttribute("pageable", boardPages); // Page 객체
+		model.addAttribute("searchTitle", searchTitle); // 검색어
+		model.addAttribute("pageNumbers", pageNumbers); // 페이지 번호 배열
 		
 		return "index";
 	}

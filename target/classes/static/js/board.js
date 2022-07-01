@@ -14,6 +14,10 @@ let index = {
 			this.update();
 		})		
 		
+		$("#btn-reply-save").bind("click", () => {
+			this.replySave();
+		})		
+		
 	},
 	
 	save: function() {
@@ -85,8 +89,62 @@ let index = {
 			console.log(error);
 			alert("게시글이 수정되지 않았습니다.");
 		});
-}
+	},
 	
+	replySave: function() {
+		let data = {
+			boardId: $("#board-id").text(),
+			content: $("#reply-content").val()
+		}
+		
+		$.ajax({
+			type: "POST",
+			url: `/api/board/${data.boardId}/reply`,
+			data: JSON.stringify(data),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		})
+		.done(function(response) {
+			console.log(response)
+			appendReply(response.data);
+		})
+		.fail(function(error) {
+			alert("오류 발생. 댓글이 등록되지 않았습니다.")
+			console.log(error);
+		});
+		
+	},
+	
+	replyDelete: function(boardId, replyId) {
+
+		$.ajax({
+			type: "DELETE",
+			url: `/api/board/${boardId}/reply/${replyId}`	
+		})
+		.done(function(response) {
+			alert("댓글이 삭제되었습니다.");
+			location.href=`/board/${boardId}`;
+		})
+		.fail(function(error) {
+			alert("오류 발생. 댓글이 삭제되지 않았습니다.");
+		})
+		
+	}
+	
+}
+
+function appendReply(reply) {
+	let principalId = $("#principal-id").val();
+	
+	let childElement = `<li class="list-group-item d-flex justify-content-between">
+		  	<h6>${reply.user.username} : ${reply.content}</h6>
+		  	<c:if test="${reply.user.id == principalId}">
+			  	<button class="btn btn-danger btn-sm" onclick="index.replyDelete(${reply.board.id}, ${reply.id})">삭제</button>
+		  	</c:if>
+		  </li>`;
+		   
+	$("#reply--box").prepend(childElement);
+	$("#reply-content").val("");	  
 }
 
 index.init();

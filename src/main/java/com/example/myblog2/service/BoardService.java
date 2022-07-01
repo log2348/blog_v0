@@ -76,7 +76,17 @@ public class BoardService {
 		Reply replyEntity = replyRepository.save(requestReply);
 		
 		return replyEntity;
-		
+	}
+
+	@Transactional
+	public void deleteReplyById(int replyId) {
+		replyRepository.deleteById(replyId);		
+	}
+	
+	// 검색 기능
+	@Transactional(readOnly = true)
+	public Page<Board> searchBoardByTitle(String title, Pageable pageable) {
+		return boardRepository.findByTitleContaining(title, pageable);
 	}
 
 }

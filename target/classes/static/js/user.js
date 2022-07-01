@@ -13,7 +13,8 @@ let index = {
 			this.update();
 		})
 	},
-	
+	/*
+	 * 전통적인 로그인 방식
 	save: function() {
 		let data = {
 			username:$("#username").val(),
@@ -67,6 +68,7 @@ let index = {
 			console.log(error)
 		});
 	},
+	*/
 	
 	update: function() {
 		let data = {

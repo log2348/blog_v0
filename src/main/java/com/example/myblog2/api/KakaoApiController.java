@@ -7,9 +7,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -20,8 +17,6 @@ import org.springframework.web.client.RestTemplate;
 
 import com.example.myblog2.dto.KakaoProfile;
 import com.example.myblog2.dto.OAuthToken;
-import com.example.myblog2.dto.KakaoProfile.KakaoAccount;
-import com.example.myblog2.model.User;
 import com.example.myblog2.service.UserService;
 
 @Controller
@@ -52,7 +47,7 @@ public class KakaoApiController {
 	*/
 
 	
-//	@ResponseBody
+	@ResponseBody
 	@GetMapping("/oauth/kakao/callback")
 	public String kakaoCallback(@RequestParam String code) {
 		
@@ -107,30 +102,9 @@ public class KakaoApiController {
 		 * 한번이라도 가입 진행된 사용자라면 로그인처리
 		 */
 		
-		KakaoAccount kakaoAccount = kakaoUserInfoResponse.getBody().getKakaoAccount();
 		
-		User kakaoUser = User.builder()
-				.username(kakaoAccount.getEmail() + "_" + kakaoUserInfoResponse.getBody().getId())
-				.password(kakaoUserKey)
-				.email(kakaoAccount.getEmail())
-				.oauth("Kakao")
-				.build();
 		
-		// 최초 접속이 아니라면(이미 가입된 사용자라면) 저장x
-		// 사용자 조회 안될경우 new User 객체 던짐
-		User originUser = userService.checkOldUser(kakaoUser.getUsername());
-		
-		if(originUser.getUsername() == null) {
-			// 신규 회원일 경우
-			userService.saveUser(kakaoUser);
-		}
-		
-		// 자동 로그인 처리
-		Authentication authentication = authenticationManager
-				.authenticate(new UsernamePasswordAuthenticationToken(kakaoUser.getUsername(), kakaoUser.getPassword()));
-		SecurityContextHolder.getContext().setAuthentication(authentication);
-		
-		return "redirect:/";	
+		return "카카오 사용자 정보 : " + kakaoUserInfoResponse;
 	}
 	
 }
