@@ -52,6 +52,7 @@ public class UserService {
 
 	@Transactional
 	public User checkOldUser(String username) {
+		// 찾는 유저가 없으면 new User 객체 던짐
 		User userEntity = userRepository.findByUsername(username).orElseGet(() -> {
 			return new User();
 		});

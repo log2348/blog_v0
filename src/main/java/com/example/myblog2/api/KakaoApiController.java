@@ -7,6 +7,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -16,7 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.myblog2.dto.KakaoProfile;
+import com.example.myblog2.dto.KakaoProfile.KakaoAccount;
 import com.example.myblog2.dto.OAuthToken;
+import com.example.myblog2.model.User;
 import com.example.myblog2.service.UserService;
 
 @Controller
@@ -46,8 +52,7 @@ public class KakaoApiController {
 	}
 	*/
 
-	
-	@ResponseBody
+//	@ResponseBody
 	@GetMapping("/oauth/kakao/callback")
 	public String kakaoCallback(@RequestParam String code) {
 		
@@ -77,7 +82,6 @@ public class KakaoApiController {
 						OAuthToken.class);
 		
 		// 3. 사용자 정보 가져오기
-		
 		RestTemplate kakaoUserInfoRestTemplate = new RestTemplate();
 
 		// 헤더
@@ -102,9 +106,29 @@ public class KakaoApiController {
 		 * 한번이라도 가입 진행된 사용자라면 로그인처리
 		 */
 		
+		KakaoAccount kakaoAccount = kakaoUserInfoResponse.getBody().getKakaoAccount();
 		
+		User kakaoUser = User.builder()
+				.username(kakaoAccount.getEmail() + "_" + kakaoUserInfoResponse.getBody().getId())
+				.password(kakaoUserKey)
+				.email(kakaoAccount.getEmail())
+				.oauth("Kakao")
+				.build();
 		
-		return "카카오 사용자 정보 : " + kakaoUserInfoResponse;
+		User originUser = userService.checkOldUser(kakaoUser.getUsername());
+		
+		if(originUser.getUsername() == null) {
+			// 신규 회원이므로 회원가입 처리
+			userService.saveUser(kakaoUser);
+		}
+		
+		// 시큐리티 세션에 유저 정보 저장
+		Authentication authentication = authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(kakaoUser.getUsername(), kakaoUserKey));
+		
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		
+		return "redirect:/";
 	}
 	
 }

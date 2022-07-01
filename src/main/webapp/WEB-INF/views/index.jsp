@@ -11,32 +11,31 @@
   }
 </style>
 
-  <div class="container" style="margin-top: 30px">
-  	<img class="card-img-top" src="/image/dog.png" />
-       <div class="card-body">
-        <c:if test="${not empty principal}">
-          <h4 class="card-title">${principal.user.username} 님</h4>
-          <a href="/user/update_user_form" class="badge badge-info">MY INFO</a>
-        </c:if>
+<div class="container" style="margin-top: 30px">
+  <img class="card-img-top" src="/image/dog.png" />
+  <div class="card-body">
+    <c:if test="${not empty principal}">
+      <h4 class="card-title">${principal.user.username} 님</h4>
+      <a href="/user/update_user_form" class="badge badge-info">MY INFO</a>
+    </c:if>
+  </div>
+</div>
+
+<div class="container" style="margin-top: 30px">
+  <div class="row">
+    <c:forEach var="board" items="${pageable.content}">
+      <div class="card m-2 col-sm-10">
+        <div class="card-body">
+          <h2>${board.title}</h2>
+          <h6>Date : ${board.createDate}</h6>
+          <h8 type="text" class="multiLine">${board.content}</h8>
+          <a href="/board/${board.id}" class="btn btn-primary float-right">Detail</a>
+          <br />
         </div>
-    </div>
-    <hr/>
-    
-    <div class="container" style="margin-top: 30px">
-	<div class="row">
-      <c:forEach var="board" items="${pageable.content}">
-        <div class="card m-2 col-sm-10">
-          <div class="card-body">
-            <h2>${board.title}</h2>
-            <h6>Date : ${board.createDate}</h6>
-            <h8 type="text" class="multiLine">${board.content}</h8>
-            <a href="/board/${board.id}" class="btn btn-primary float-right">Detail</a>
-            <br />
-          </div>
-        </div>
-      </c:forEach>
-    </div>
-    </div>
+      </div>
+    </c:forEach>
+  </div>
+</div>
 <br />
 
 <ul class="pagination justify-content-center">

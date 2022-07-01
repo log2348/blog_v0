@@ -41,7 +41,7 @@
 	</div>
 	<br/>
 	<div class="card">
-		<div class ="card-header">댓글 목록</div>
+		<div class ="card-header">전체 댓글</div>
 	</div>
 	<ul class="list-group" id="reply--box">
 	<c:forEach var="reply" items="${board.replies}">

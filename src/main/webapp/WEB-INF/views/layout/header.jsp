@@ -27,18 +27,18 @@ uri="http://www.springframework.org/security/tags" %>
         <c:choose>
           <c:when test="${empty principal}">
             <li class="nav-item">
-              <a class="nav-link" href="/auth/login_form">LOGIN</a>
+              <a class="nav-link" href="/auth/login_form" style="font-size:18px">LOGIN</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/auth/join_form">JOIN</a>
+              <a class="nav-link" href="/auth/join_form" style="font-size:18px">JOIN</a>
             </li>
           </c:when>
           <c:otherwise>
             <li class="nav-item">
-              <a class="nav-link" href="/board/save_post_form">POST</a>
+              <a class="nav-link" href="/board/save_post_form" style="font-size:18px">POST</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/logout">LOGOUT</a>
+              <a class="nav-link" href="/logout" style="font-size:18px">LOGOUT</a>
             </li>
           </c:otherwise>
         </c:choose>
@@ -47,7 +47,7 @@ uri="http://www.springframework.org/security/tags" %>
     <div class="float-right">
       <form class="form-inline" action="/board/search" method="get">
         <input type="text" class="form-control m-2" name="q" placeholder="Search" value="${searchTitle}" />
-        <button type="submit" class="btn btn-light">Search</button>
+        <input type="image" src="/image/search.png" width="50" height="50">
       </form>
     </div>
   </nav>
