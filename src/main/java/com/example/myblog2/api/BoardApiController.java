@@ -51,7 +51,7 @@ public class BoardApiController {
 			@AuthenticationPrincipal PrincipalDetail principalDetail) {
 		
 		Reply replyEntity = boardService.saveReply(principalDetail.getUser(), boardId, reply);		
-		return new ResponseDto<>(HttpStatus.OK.value(), replyEntity);
+		return new ResponseDto<Reply>(HttpStatus.OK.value(), replyEntity);
 	}
 	
 	// 댓글 삭제 기능

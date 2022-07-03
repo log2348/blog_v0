@@ -33,8 +33,8 @@ public class Reply {
 	private String content;
 	
 	@ManyToOne
-	@JsonIgnoreProperties({"replies", "userId"})
 	@JoinColumn(name = "boardId")
+	@JsonIgnoreProperties({"replies", "userId"})
 	private Board board;
 	
 	@ManyToOne

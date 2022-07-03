@@ -2,6 +2,8 @@
 
 <div class="container">
   <form action="/auth/loginProc" method="post">
+  <br />
+  <h3><b>로그인</b></h3>
     <br />
     <div class="form-group">
       <label for="username">Username:</label>

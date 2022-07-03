@@ -21,8 +21,13 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-	@GetMapping({"", "/", "/board/search"})
-	public String index(@PageableDefault(size = 4, sort = "id", direction = Direction.DESC) Pageable pageable,
+	@GetMapping({"", "/"})
+	public String index() {
+		return "index";
+	}
+	
+	@GetMapping({"/board/list_form", "/board/search"})
+	public String getBoardList(@PageableDefault(size = 4, sort = "id", direction = Direction.DESC) Pageable pageable,
 			Model model, String q) {
 		
 		// Pagination - 페이지 블록 동적 처리
@@ -51,7 +56,7 @@ public class BoardController {
 		model.addAttribute("searchTitle", searchTitle); // 검색어
 		model.addAttribute("pageNumbers", pageNumbers); // 페이지 번호 배열
 		
-		return "index";
+		return "board/list_form";
 	}
 
 	// 글 작성 폼

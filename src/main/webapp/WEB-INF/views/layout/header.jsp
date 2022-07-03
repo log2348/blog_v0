@@ -17,28 +17,24 @@ uri="http://www.springframework.org/security/tags" %>
 </head>
 <body>
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <a class="navbar-brand" href="/">BLOG</a>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <a class="navbar-brand" href="/"><b>BLOG</b></a>
+    <div class="collapse navbar-collapse">
       <ul class="navbar-nav">
         <c:choose>
           <c:when test="${empty principal}">
             <li class="nav-item">
-              <a class="nav-link" href="/auth/login_form" style="font-size:18px">LOGIN</a>
+              <a class="nav-link" href="/auth/login_form" style="font-size:18px">로그인</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/auth/join_form" style="font-size:18px">JOIN</a>
+              <a class="nav-link" href="/auth/join_form" style="font-size:18px">회원가입</a>
             </li>
           </c:when>
           <c:otherwise>
             <li class="nav-item">
-              <a class="nav-link" href="/board/save_post_form" style="font-size:18px">POST</a>
+              <a class="nav-link" href="/board/list_form" style="font-size:18px">게시판</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/logout" style="font-size:18px">LOGOUT</a>
+              <a class="nav-link" href="/logout" style="font-size:18px">로그아웃</a>
             </li>
           </c:otherwise>
         </c:choose>

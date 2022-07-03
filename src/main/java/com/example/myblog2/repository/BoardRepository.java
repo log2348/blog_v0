@@ -8,7 +8,7 @@ import com.example.myblog2.model.Board;
 
 public interface BoardRepository extends JpaRepository<Board, Integer>{
 	
-	// SELECT * FROM board WHERE title LIKE %q%
+	// SELECT * FROM board WHERE title LIKE %title%
 	Page<Board> findByTitleContaining(String title, Pageable pageable);
 
 }

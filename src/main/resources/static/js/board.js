@@ -35,34 +35,43 @@ let index = {
 			dataType: "json"
 		})
 		.done(function(response) {
-			if(response.status == 200) {
-			alert("글쓰기가 완료되었습니다.");
-			location.href="/";				
+			if(data.title == "" || data.title.trim() == ""){
+				alert("제목을 입력해주세요.")
 			} else {
-				alert("글쓰기 실패. 다시 시도해주세요.");
+				if(data.content == "" || data.content.trim() == "") {
+					alert("내용을 입력해주세요.")
+				} else {
+					alert("게시글 등록 완료.");
+					location.href="/board/list_form";				
+				}				
 			}
 		})
 		.fail(function(error) {
-			alert("글쓰기에 실패했습니다.");
+			alert("게시글 등록 실패.");
 		});
 		
 	},
 	
 	delete: function() {
 		let id = $("#board-id").text();
+		let deleteCheck = confirm("삭제하시겠습니까?");
 		
-		$.ajax({
-			type: "DELETE",
-			url: "/api/board/" + id
-		})
-		.done(function(response) {
-			alert("게시글이 삭제되었습니다.");
-			location.href="/";
-		})
-		.fail(function(error) {
-			console.log(error);
-			alert("게시글이 삭제되지 않았습니다.");
-		});
+		if(deleteCheck) {
+			$.ajax({
+				type: "DELETE",
+				url: "/api/board/" + id
+			})
+			.done(function(response) {
+				alert("게시글이 삭제되었습니다.");
+				location.href="/board/list_form";
+			})
+			.fail(function(error) {
+				console.log(error);
+				alert("게시글이 삭제되지 않았습니다.");
+			});
+			
+		}
+		
 	},
 	
 	

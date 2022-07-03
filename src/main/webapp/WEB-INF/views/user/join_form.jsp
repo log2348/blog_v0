@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ include file="../layout/header.jsp" %>
 
 <div class="container">
-    <br />
     <form  action="/auth/joinProc" method="post">
+      <br />
+  <h3><b>회원가입</b></h3>
+    <br />
     <div class="form-group">
       <label for="username">Username: </label>
       <input type="text" class="form-control" placeholder="Enter username" id="username" name="username">

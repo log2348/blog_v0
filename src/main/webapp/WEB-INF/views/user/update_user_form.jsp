@@ -3,7 +3,7 @@
 
 <br/><br/>
 <div class="container">
-<h3>My Info</h3>
+<h3>회원정보</h3>
 <br/>
 <form action="#" class="was-validated">
   <div class="form-group">
