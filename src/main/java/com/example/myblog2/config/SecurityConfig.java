@@ -14,6 +14,13 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import com.example.myblog2.auth.PrincipalDetailService;
 
+
+/**
+*
+* ﻿Spring security에서는
+* ﻿@EnableWebSecurity 어노테이션 지정할 경우 자동으로 CSRF 보호 기능이 활성화된다.
+*/
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
