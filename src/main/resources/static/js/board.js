@@ -23,7 +23,7 @@ let index = {
 	save: function() {
 		
 		let data = {
-			title: $("#title").val(),
+			title:  xssCheck($("#title").val(), 1),
 			content: $("#content").val()
 		}
 		
@@ -79,7 +79,7 @@ let index = {
 		let id = $("#board-id").val();
 		
 		let data = {
-			title: $("#title").val(),
+			title: xssCheck($("#title").val(), 1),
 			content: $("#content").val()
 		}
 		
@@ -166,6 +166,17 @@ function appendReply(reply) {
 		   
 	$("#reply--box").prepend(childElement);
 	$("#reply-content").val("");	  
+}
+
+// 스크립트단에서 xss 막기
+function xssCheck(str, level) {
+    if (level == undefined || level == 0) {
+        str = str.replace(/\<|\>|\"|\'|\%|\;|\(|\)|\&|\+|\-/g,"");
+    } else if (level != undefined && level == 1) {
+        str = str.replace(/\</g, "&lt;");
+        str = str.replace(/\>/g, "&gt;");
+    }
+    return str;
 }
 
 index.init();
