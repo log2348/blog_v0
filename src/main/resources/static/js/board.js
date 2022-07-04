@@ -92,7 +92,7 @@ let index = {
 		})
 		.done(function(response) {
 			alert("게시글이 수정되었습니다.");
-			location.href="/";
+			location.href="/board/" + id;
 		})
 		.fail(function(error) {
 			console.log(error);
