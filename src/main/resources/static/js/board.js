@@ -21,13 +21,19 @@ let index = {
 	},
 	
 	save: function() {
+		let token = $("meta[name='_csrf']").attr("content");
+		let header = $("meta[name='_csrf_header']").attr("content");
 		
 		let data = {
-			title:  xssCheck($("#title").val(), 1),
+			title: xssCheck($("#title").val(), 1),
 			content: $("#content").val()
 		}
 		
 		$.ajax({
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader(header, token);
+			},
+			
 			type: "POST",
 			url: "/api/board/save",
 			data: JSON.stringify(data),
@@ -54,10 +60,16 @@ let index = {
 	
 	delete: function() {
 		let id = $("#board-id").text();
+		let token = $("meta[name='_csrf']").attr("content");
+		let header = $("meta[name='_csrf_header']").attr("content");
 		let deleteCheck = confirm("삭제하시겠습니까?");
 		
 		if(deleteCheck) {
 			$.ajax({
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader(header, token);
+				},
+			
 				type: "DELETE",
 				url: "/api/board/" + id
 			})
@@ -77,6 +89,8 @@ let index = {
 	
 	update: function() {
 		let id = $("#board-id").val();
+		let token = $("meta[name='_csrf']").attr("content");
+		let header = $("meta[name='_csrf_header']").attr("content");
 		
 		let data = {
 			title: xssCheck($("#title").val(), 1),
@@ -84,6 +98,10 @@ let index = {
 		}
 		
 		$.ajax({
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader(header, token);
+			},
+			
 			type: "PUT",
 			url: "/api/board/" + id,
 			data: JSON.stringify(data),
@@ -101,12 +119,19 @@ let index = {
 	},
 	
 	replySave: function() {
+		let token = $("meta[name='_csrf']").attr("content");
+		let header = $("meta[name='_csrf_header']").attr("content");
+		
 		let data = {
 			boardId: $("#board-id").text(),
 			content: $("#reply-content").val()
 		}
 		
 		$.ajax({
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader(header, token);
+			},
+			
 			type: "POST",
 			url: `/api/board/${data.boardId}/reply`,
 			data: JSON.stringify(data),
@@ -129,12 +154,18 @@ let index = {
 	},
 	
 	replyDelete: function(boardId, replyId) {
+		let token = $("meta[name='_csrf']").attr("content");
+		let header = $("meta[name='_csrf_header']").attr("content");
 
 		let deleteCheck = confirm("삭제하시겠습니까?");
 		
 		if(deleteCheck) {
 			
 			$.ajax({
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader(header, token);
+				},
+			
 				type: "DELETE",
 				url: `/api/board/${boardId}/reply/${replyId}`	
 			})

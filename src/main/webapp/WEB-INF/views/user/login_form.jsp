@@ -2,6 +2,7 @@
 
 <div class="container">
   <form action="/auth/loginProc" method="post">
+  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
   <br />
   <h3><b>로그인</b></h3>
     <br />
