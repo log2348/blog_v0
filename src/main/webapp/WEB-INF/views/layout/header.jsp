@@ -29,14 +29,14 @@
 						<li class="nav-item"><a class="nav-link" href="/auth/join_form" style="font-size: 18px">회원가입</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="nav-item"><a class="dropdown-toggle nav-link" style="font-size: 18px">게시판</a></li>
+						<li class="nav-item"><a class="nav-link" style="font-size: 18px">게시판</a></li>
 						<li class="nav-item"><a class="nav-link" href="/logout" style="font-size: 18px">로그아웃</a></li>
 					</c:otherwise>
 				</c:choose>
 				<li class="nav-item dropdown"><a class="dropdown-toggle nav-link" style="font-size: 18px" data-toggle="dropdown">스토리</a>
 					<ul class="dropdown-menu">
 						<li class="nav-item"><a class="dropdown-item" href="/story/home">목록</a></li>
-						<li class="nav-item"><a class="dropdown-item" href="/story/upload">업로드</a></li>
+						<li class="nav-item"><a class="dropdown-item" href="/story/upload_form">업로드</a></li>
 					</ul>
 			</ul>
 		</div>

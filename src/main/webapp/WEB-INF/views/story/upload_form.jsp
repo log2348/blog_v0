@@ -1,22 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
 
 <main class="container py-5">
 
 	<div>
-		<form action="/story/image/upload" enctype="multipart/form-data" method="post">
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		<form action="/story/image/upload" enctype="multipart/form-data"
+			method="post">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}">
+			<h6>제목 :</h6>
 			<div class="input-group mt-3">
-				<input type="file" class="custom-file-input" id="customFile"> <label class="custom-file-label" for="customFile">Choose File</label>
+				<input type="text" name="imageTitle" class="form-control"
+					required="required">
 			</div>
+			<br />
+			<h6>첨부 파일 :</h6>
 			<div class="input-group mt-3">
-				<div class="input-group-prepend">
-					<span class="input-group-text">Description</span>
-				</div>
-				<input type="text" name="storyText" class="form-control" required="required">
+				<label class="custom-file-label" for="customFile">파일을 선택하세요</label><input
+					type="file" name="file" class="form-control custom-file-input"
+					id="customFile" required="required">
 			</div>
+			<br />
 			<div class="input-group mt-3">
-				<button type="submit" class="btn btn-info">파일 등록</button>
+				<button type="submit" class="btn btn-primary">파일 등록</button>
 			</div>
 		</form>
 	</div>

@@ -26,8 +26,8 @@ public class Image {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String imageFileName;
-	private String describeText;
+	private String imageUrl;
+	private String imageTitle;
 	private String originFileName;
 	
 	@ManyToOne
